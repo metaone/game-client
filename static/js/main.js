@@ -1,9 +1,19 @@
-var ws = new WebSocket("ws://localhost:8888/ws");
+require.config({
+    paths: {
+        backbone   : 'libs/backbone',
+        jquery     : 'libs/jquery-2.0.2',
+        mustache   : 'libs/mustache',
+        underscore : 'libs/underscore',
+        text       : 'libs/text'
+    }
+});
 
-ws.onopen = function() {
-    ws.send("Hello, world");
-};
+require([
+    'app'
+], function (
+    App
+) {
+    'use strict';
 
-ws.onmessage = function (evt) {
-    alert(evt.data);
-};
+    App.initialize();
+});
