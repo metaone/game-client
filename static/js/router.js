@@ -3,12 +3,14 @@ define([
     'underscore',
     'backbone',
     'views/loader',
+    'views/login',
     'views/error'
 ], function(
     $,
     _,
     Backbone,
     LoaderView,
+    LoginView,
     ErrorView
 ) {
     'use strict';
@@ -17,12 +19,13 @@ define([
         routes : {
             ''         : 'index_route',
             'loader'   : 'loader_route',
+            'login'    : 'login_route',
             '*default' : 'error_route'
         }
     });
 
     var initialize = function () {
-        var app_router = new AppRouter;
+        window.app_router = new AppRouter;
 
         app_router.on('route:index_route', function () {
             var loaderView = new LoaderView();
@@ -32,6 +35,11 @@ define([
         app_router.on('route:loader_route', function () {
             var loaderView = new LoaderView();
             loaderView.render();
+        });
+
+        app_router.on('route:login_route', function () {
+            var loginView = new LoginView();
+            loginView.render();
         });
 
         app_router.on('route:error_route', function (route) {

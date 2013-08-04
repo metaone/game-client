@@ -23,7 +23,7 @@ define([
         };
 
         ws.onmessage = function (evt) {
-            alert(evt.data);
+            console.log(evt.data);
         };
     }
 

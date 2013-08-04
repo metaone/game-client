@@ -1,10 +1,16 @@
 require.config({
-    paths: {
+    paths : {
         backbone   : 'libs/backbone',
         jquery     : 'libs/jquery-2.0.2',
         mustache   : 'libs/mustache',
         underscore : 'libs/underscore',
-        text       : 'libs/text'
+        text       : 'libs/text',
+        cookie     : 'libs/jquery.cookie'
+    },
+    shim : {
+        cookie  : {
+            deps : ["jquery"]
+        }
     }
 });
 
