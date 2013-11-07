@@ -4,6 +4,7 @@ define([
     'backbone',
     'mustache',
     'cookie',
+    'config',
     'text!templates/login.html'
 ], function(
     $,
@@ -11,9 +12,12 @@ define([
     Backbone,
     Mustache,
     cookie,
+    config,
     loginTemplate
 ) {
     'use strict';
+
+    var handler = 'auth';
 
     return Backbone.View.extend({
         events : {
@@ -23,7 +27,7 @@ define([
         el : $('#container'),
 
         initialize : function () {
-            this.WSAuth = new WebSocket('ws://localhost:8888/auth');
+            this.WSAuth = new WebSocket('ws://' + config.host + ':' + config.port + '/' + handler);
 
             this.WSAuth.onmessage = function (evt) {
                 var response = JSON.parse(evt.data);
