@@ -13,10 +13,12 @@ define([
 ) {
     'use strict';
 
+    var handler = 'ws';
+
     var initialize = function () {
         Router.initialize();
 
-        var ws = new WebSocket('ws://' + config.host + ':' + config.port + '/' + config.handler);
+        var ws = new WebSocket('ws://' + config.host + ':' + config.port + '/' + handler);
 
         ws.onopen = function() {
             ws.send("Hello, world");

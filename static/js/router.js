@@ -4,6 +4,7 @@ define([
     'backbone',
     'views/loader',
     'views/login',
+    'views/register',
     'views/error'
 ], function(
     $,
@@ -11,16 +12,18 @@ define([
     Backbone,
     LoaderView,
     LoginView,
+    RegisterView,
     ErrorView
 ) {
     'use strict';
 
     var AppRouter = Backbone.Router.extend({
         routes : {
-            ''         : 'index_route',
-            'loader'   : 'loader_route',
-            'login'    : 'login_route',
-            '*default' : 'error_route'
+            ''        : 'index_route',
+            'loader'  : 'loader_route',
+            'login'   : 'login_route',
+            'register': 'register_route',
+            '*default': 'error_route'
         }
     });
 
@@ -40,6 +43,11 @@ define([
         app_router.on('route:login_route', function () {
             var loginView = new LoginView();
             loginView.render();
+        });
+
+        app_router.on('route:register_route', function () {
+            var registerView = new RegisterView();
+            registerView.render();
         });
 
         app_router.on('route:error_route', function (route) {

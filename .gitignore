@@ -1,2 +1,5 @@
 # Mr Developer
 game-client.iml
+
+# Configs
+static/js/config.js

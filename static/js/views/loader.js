@@ -3,7 +3,7 @@ define([
     'underscore',
     'backbone',
     'mustache',
-    'text!templates/loader.html'
+    'text!templates/main/loader.html'
 ], function(
     $,
     _,

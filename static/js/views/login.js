@@ -1,3 +1,9 @@
+/*
+    Login View
+
+    @author Mykola Skorenkyi
+ */
+
 define([
     'jquery',
     'underscore',
@@ -5,7 +11,9 @@ define([
     'mustache',
     'cookie',
     'config',
-    'text!templates/login.html'
+    'text!templates/main/partial/header.html',
+    'text!templates/main/partial/footer.html',
+    'text!templates/main/login.html'
 ], function(
     $,
     _,
@@ -13,6 +21,8 @@ define([
     Mustache,
     cookie,
     config,
+    headerTemplate,
+    footerTemplate,
     loginTemplate
 ) {
     'use strict';
@@ -20,13 +30,23 @@ define([
     var handler = 'auth';
 
     return Backbone.View.extend({
-        events : {
-            'click #login' : 'login'
-        },
-
+        /*
+            View element
+         */
         el : $('#container'),
 
-        initialize : function () {
+        /*
+            Events mapping
+         */
+        events : {
+            'click #login': 'login',
+            'click #register': 'register'
+        },
+
+        /*
+            Init method
+         */
+        initialize: function () {
             this.WSAuth = new WebSocket('ws://' + config.host + ':' + config.port + '/' + handler);
 
             this.WSAuth.onmessage = function (evt) {
@@ -43,11 +63,22 @@ define([
             };
         },
 
-        render : function () {
-            this.$el.html(Mustache.to_html(loginTemplate, {}));
+        /*
+            Render method
+
+            @return html
+         */
+        render: function () {
+            this.$el.html(Mustache.to_html(loginTemplate, {
+                header: Mustache.to_html(headerTemplate),
+                footer: Mustache.to_html(footerTemplate)
+            }));
         },
 
-        login : function (e) {
+        /*
+            Login handler
+         */
+        login: function (e) {
             e.preventDefault();
 
             var username = this.$el.find('#username').val(),
@@ -55,8 +86,8 @@ define([
 
             if (this._validate()) {
                 this.WSAuth.send(JSON.stringify({
-                    username : username,
-                    password : password
+                    username: username,
+                    password: password
                 }));
             } else {
                 alert('error');
@@ -65,7 +96,24 @@ define([
             return false;
         },
 
-        _validate : function () {
+        /*
+            Register handler
+         */
+        register: function (e) {
+            e.preventDefault();
+
+            window.app_router.navigate('register', {trigger : true});
+
+            return false;
+        },
+
+        /*
+            Validate method
+
+            @private
+            @return boolean
+         */
+        _validate: function () {
             var username = this.$el.find('#username').val(),
                 password = this.$el.find('#password').val();
 
