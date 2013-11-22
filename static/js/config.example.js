@@ -9,6 +9,7 @@ define([], function () {
     'use strict';
 
     return {
+        protocol: 'ws://',
         host: 'localhost',
         port: 8888
     };

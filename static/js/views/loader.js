@@ -3,22 +3,22 @@ define([
     'underscore',
     'backbone',
     'mustache',
+    'views/base',
     'text!templates/main/loader.html'
 ], function(
     $,
     _,
     Backbone,
     Mustache,
+    BaseView,
     loaderTemplate
 ) {
     'use strict';
 
-    var LoaderView = Backbone.View.extend({
+    return BaseView.extend({
         el : $('#container'),
         render : function () {
             this.$el.html(Mustache.to_html(loaderTemplate));
         }
     });
-
-    return LoaderView;
 });

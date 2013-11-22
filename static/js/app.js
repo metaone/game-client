@@ -15,21 +15,21 @@ define([
 
     var handler = 'ws';
 
-    var initialize = function () {
-        Router.initialize();
-
-        var ws = new WebSocket('ws://' + config.host + ':' + config.port + '/' + handler);
-
-        ws.onopen = function() {
-            ws.send("Hello, world");
-        };
-
-        ws.onmessage = function (evt) {
-            console.log(evt.data);
-        };
-    }
-
     return {
-        initialize: initialize
+        initialize: function () {
+            window.app_router = new Router();
+
+            Backbone.history.start();
+
+            var ws = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + handler);
+
+            ws.onopen = function() {
+                ws.send('Hello, world');
+            };
+
+            ws.onmessage = function (evt) {
+                console.log(evt.data);
+            };
+        }
     };
 });

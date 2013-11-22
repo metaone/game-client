@@ -9,6 +9,7 @@ define([
     'underscore',
     'backbone',
     'mustache',
+    'views/base',
     'cookie',
     'config',
     'text!templates/main/partial/header.html',
@@ -19,6 +20,7 @@ define([
     _,
     Backbone,
     Mustache,
+    BaseView,
     cookie,
     config,
     headerTemplate,
@@ -29,7 +31,8 @@ define([
 
     var handler = 'auth';
 
-    return Backbone.View.extend({
+//    return Backbone.View.extend({
+    return BaseView.extend({
         /*
             View element
          */
@@ -39,15 +42,15 @@ define([
             Events mapping
          */
         events : {
-            'click #login': 'login',
-            'click #register': 'register'
+            'click #login_view #login': 'login',
+            'click #login_view #register': 'register'
         },
 
         /*
             Init method
          */
         initialize: function () {
-            this.WSAuth = new WebSocket('ws://' + config.host + ':' + config.port + '/' + handler);
+            this.WSAuth = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + handler);
 
             this.WSAuth.onmessage = function (evt) {
                 var response = JSON.parse(evt.data);
