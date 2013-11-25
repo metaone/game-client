@@ -17,9 +17,9 @@ require.config({
 require([
     'app'
 ], function (
-    App
+    Application
 ) {
     'use strict';
 
-    App.initialize();
+    var app = new Application();
 });
