@@ -3,31 +3,40 @@ define([
     'underscore',
     'backbone',
     'router',
-    'config'
+    'config',
+    'i18next'
 ], function(
     $,
     _,
     Backbone,
     Router,
-    config
+    config,
+    i18next
 ) {
     'use strict';
 
     var handler = 'ws';
 
     return function () {
-        window.app_router = new Router();
+        i18next.init({
+            lng: 'en',
+            resGetPath: 'static/locales/__lng__/translation.json',
+            fallbackLng: 'en'
+        }, function () {
+            window.GameApp = {
+                router: new Router(),
+                t: i18next.t
+            }
 
-        Backbone.history.start();
+            Backbone.history.start();
 
-        var ws = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + handler);
+            var ws = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + handler);
 
-        ws.onopen = function() {
-            ws.send('Hello, world');
-        };
+            ws.onopen = function() {
+                ws.send('Hello, world');
+            };
 
-        ws.onmessage = function (evt) {
-            console.log(evt.data);
-        };
+            ws.onmessage = function (evt) {};
+        });
     };
 });

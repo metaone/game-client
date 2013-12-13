@@ -4,9 +4,9 @@ define([
     'backbone',
     'mustache',
     'views/base',
-    'text!templates/main/partial/header.html',
-    'text!templates/main/partial/footer.html',
-    'text!templates/main/index.html'
+    'text!templates/login/partial/header.html',
+    'text!templates/login/partial/footer.html',
+    'text!templates/login/index.html'
 ], function(
     $,
     _,

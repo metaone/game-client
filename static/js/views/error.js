@@ -4,7 +4,7 @@ define([
     'backbone',
     'mustache',
     'views/base',
-    'text!templates/main/error.html'
+    'text!templates/login/error.html'
 ], function(
     $,
     _,

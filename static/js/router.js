@@ -3,8 +3,8 @@ define([
     'underscore',
     'backbone',
     'views/loader',
-    'views/login',
-    'views/register',
+    'views/login/login',
+    'views/login/register',
     'views/error',
     'views/index'
 ], function(

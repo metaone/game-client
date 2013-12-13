@@ -12,9 +12,9 @@ define([
     'views/base',
     'cookie',
     'config',
-    'text!templates/main/partial/header.html',
-    'text!templates/main/partial/footer.html',
-    'text!templates/main/login.html'
+    'text!templates/login/partial/header.html',
+    'text!templates/login/partial/footer.html',
+    'text!templates/login/login.html'
 ], function(
     $,
     _,
@@ -29,9 +29,6 @@ define([
 ) {
     'use strict';
 
-    var handler = 'auth';
-
-//    return Backbone.View.extend({
     return BaseView.extend({
         /*
             View element
@@ -50,13 +47,17 @@ define([
             Init method
          */
         initialize: function () {
-            this.WSAuth = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + handler);
+            _.bindAll(this);
+
+            this.ws_handler = 'login';
+
+            this.WSAuth = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + this.ws_handler);
 
             this.WSAuth.onmessage = function (evt) {
                 var response = JSON.parse(evt.data);
                 if (response.status === 'success') {
                     $.cookie('user', response.cookie);
-                    window.app_router.navigate('loader', {trigger : true});
+                    GameApp.router.navigate('loader', {trigger : true});
                 } else {
                     alert('error: ' + response.status);
                     $('#username').val('qw');
@@ -105,7 +106,7 @@ define([
         register: function (e) {
             e.preventDefault();
 
-            window.app_router.navigate('register', {trigger : true});
+            GameApp.router.navigate('register', {trigger : true});
 
             return false;
         },

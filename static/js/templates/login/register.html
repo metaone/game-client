@@ -1,0 +1,65 @@
+{{{#header}}}{{{header}}}{{{/header}}}
+
+<div id="register_view" class="popover-content container">
+    <h2>{{#lang}}views.login.register_view.form_title{{/lang}}</h2>
+    <form role="form" class="form-horizontal" action="/">
+        <div id="status_info" class="form-group hidden">
+            <div class="col-sm-4">
+                <div class="alert"></div>
+            </div>
+        </div>
+
+        <div class="form-group field">
+            <label class="col-sm-2 control-label" for="username">
+                {{#lang}}views.login.register_view.username{{/lang}}
+            </label>
+            <div class="col-sm-2">
+                <input type="text" id="username" value="" class="form-control"
+                       placeholder="{{#lang}}views.login.register_view.username_placeholder{{/lang}}" />
+            </div>
+        </div>
+
+        <div class="form-group field">
+            <label class="control-label col-sm-2" for="email">
+                {{#lang}}views.login.register_view.email{{/lang}}
+            </label>
+            <div class="col-sm-2">
+                <input type="email" id="email" value="" class="form-control"
+                       placeholder="{{#lang}}views.login.register_view.email_placeholder{{/lang}}" />
+            </div>
+        </div>
+
+        <div class="form-group field">
+            <label class="control-label col-sm-2" for="password">
+                {{#lang}}views.login.register_view.password{{/lang}}
+            </label>
+            <div class="col-sm-2">
+                <input type="password" id="password" value="" class="form-control"
+                       placeholder="{{#lang}}views.login.register_view.password_placeholder{{/lang}}" />
+            </div>
+        </div>
+
+        <div class="form-group field">
+            <label class="control-label col-sm-2" for="password_repeat">
+                {{#lang}}views.login.register_view.password_repeat{{/lang}}
+            </label>
+            <div class="col-sm-2">
+                <input type="password" id="password_repeat" value="" class="form-control"
+                       placeholder="{{#lang}}views.login.register_view.password_repeat_placeholder{{/lang}}" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-2">
+                <button class="btn btn-default" id="register" type="submit">
+                    {{#lang}}views.login.register_view.submit_text{{/lang}}
+                </button>
+                {{#lang}}views.login.register_view.or{{/lang}}
+                <a id="login" href="#">{{#lang}}views.login.register_view.login_redirect{{/lang}}</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{{{#footer}}}{{{footer}}}{{{/footer}}}

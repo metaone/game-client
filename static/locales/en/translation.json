@@ -1,0 +1,43 @@
+{
+    "models": {
+        "login": {
+            "register_user": {
+                "empty_username"   : "Empty username",
+                "empty_email"      : "Empty email",
+                "empty_password"   : "Empty password",
+                "empty_repeat"     : "Empty repeat password",
+                "password_mismatch": "Password mismatch",
+                "user_exists"      : "User with given username already exists",
+                "invalid_email"    : "Email is invalid",
+                "success_message"  : "Registration was success"
+            }
+        }
+    },
+
+    "views": {
+        "login": {
+            "partial": {
+                "header": {
+                    "text": "Header text will be here"
+                },
+                "footer": {
+                    "text": "metaone 2013"
+                }
+            },
+            "register_view": {
+                "form_title"                 : "Register",
+                "username"                   : "Username:",
+                "username_placeholder"       : "Enter username",
+                "email"                      : "Email:",
+                "email_placeholder"          : "Enter email",
+                "password"                   : "Password:",
+                "password_placeholder"       : "Enter password",
+                "password_repeat"            : "Password retype:",
+                "password_repeat_placeholder": "Retype password",
+                "submit_text"                : "Submit",
+                "or"                         : "or",
+                "login_redirect"             : "Login"
+            }
+        }
+    }
+}

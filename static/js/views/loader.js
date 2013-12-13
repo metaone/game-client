@@ -4,7 +4,7 @@ define([
     'backbone',
     'mustache',
     'views/base',
-    'text!templates/main/loader.html'
+    'text!templates/login/loader.html'
 ], function(
     $,
     _,
