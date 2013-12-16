@@ -10,6 +10,12 @@
                 "user_exists"      : "User with given username already exists",
                 "invalid_email"    : "Email is invalid",
                 "success_message"  : "Registration was success"
+            },
+
+            "login_user": {
+                "empty_username"     : "Empty username",
+                "empty_password"     : "Empty password",
+                "invalid_credentials": "Username or password are invalid"
             }
         }
     },
@@ -24,7 +30,8 @@
                     "text": "metaone 2013"
                 }
             },
-            "register_view": {
+
+            "register": {
                 "form_title"                 : "Register",
                 "username"                   : "Username:",
                 "username_placeholder"       : "Enter username",
@@ -36,7 +43,17 @@
                 "password_repeat_placeholder": "Retype password",
                 "submit_text"                : "Submit",
                 "or"                         : "or",
-                "login_redirect"             : "Login"
+                "login_redirect"             : "login"
+            },
+
+            "login": {
+                "form_title"                 : "Login",
+                "username"                   : "Username:",
+                "username_placeholder"       : "Enter username",
+                "password"                   : "Password:",
+                "password_placeholder"       : "Enter password",
+                "or"                         : "or",
+                "register_redirect"          : "register"
             }
         }
     }

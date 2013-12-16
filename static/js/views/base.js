@@ -1,8 +1,7 @@
 /**
-    Base View
-    Use it a base for any kind of views
-
-    @author Mykola Skorenkyi
+ * Base View
+ * Use it as a base for any view
+ * @author Mykola Skorenkyi
  */
 define([
     'jquery',
@@ -22,7 +21,6 @@ define([
     return Backbone.View.extend({
         /**
          * Translation wrapper for Mustache
-         *
          * @returns {Function}
          */
         lang: function () {
@@ -31,6 +29,11 @@ define([
             }
         },
 
+        /**
+         * Open WebSocket and binds default events handlers
+         * @param handler
+         * @private
+         */
         _initWS: function (handler) {
             this.ws = new WebSocket(config.protocol + config.host + ':' + config.port + '/' + handler);
 
@@ -40,12 +43,24 @@ define([
             this.ws.onerror   = this._wsOnError;
         },
 
+        /**
+         * Default WebSocket onopen event handler
+         */
         _wsOnOpen: $.noop,
 
+        /**
+         * Default WebSocket onmessage event handler
+         */
         _wsOnMessage: $.noop,
 
+        /**
+         * Default WebSocket onclose event handler
+         */
         _wsOnClose: $.noop,
 
+        /**
+         * Default WebSocket onerror event handler
+         */
         _wsOnError: $.noop
     });
 });

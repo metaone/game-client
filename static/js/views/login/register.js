@@ -1,7 +1,7 @@
-/*
-    Register View
-
-    @author Mykola Skorenkyi
+/**
+ * Register View
+ *
+ * @author Mykola Skorenkyi
  */
 define([
     'jquery',
@@ -11,7 +11,7 @@ define([
     'bootstrap',
     'cookie',
     'config',
-    'views/base',
+    'views/login/login',
     'models/login/register_user',
     'text!templates/login/partial/header.html',
     'text!templates/login/partial/footer.html',
@@ -24,7 +24,7 @@ define([
     bootstrap,
     cookie,
     config,
-    BaseView,
+    LoginView,
     RegisterUser,
     headerTemplate,
     footerTemplate,
@@ -35,14 +35,14 @@ define([
     var handler = 'register',
         LANG_PATH = 'models.login.register_user.';
 
-    return BaseView.extend({
-        /*
-            View element
+    return LoginView.extend({
+        /**
+         * View element
          */
         el: $('#container'),
 
-        /*
-            Events mapping
+        /**
+         * Events mapping
          */
         events : {
             'click #register_view #login': 'login',
@@ -58,6 +58,11 @@ define([
             this._initWS(handler);
         },
 
+        /**
+         * Websocket onmessage event handler
+         * @param resp
+         * @private
+         */
         _wsOnMessage: function (resp) {
             var response = JSON.parse(resp.data);
 
@@ -70,10 +75,8 @@ define([
             this._setStatus(response.valid, response.data);
         },
 
-        /*
-            Render method
-
-            @return html
+        /**
+         * Render method
          */
         render: function () {
             this.$el.html(Mustache.to_html(registerTemplate, {
@@ -83,19 +86,21 @@ define([
             }));
         },
 
-        /*
-            Login handler
+        /**
+         * Login handler
+         *
+         * @param e
          */
         login: function (e) {
             e.preventDefault();
 
             GameApp.router.navigate('login', {trigger : true});
-
-            return false;
         },
 
-        /*
-            Register handler
+        /**
+         * Register handler
+         *
+         * @param e
          */
         register: function (e) {
             e.preventDefault();
@@ -110,10 +115,14 @@ define([
             } else {
                 this._setStatus(false, user.validationError);
             }
-
-            return false;
         },
 
+        /**
+         * Get user credentials from a form
+         *
+         * @returns {{username: *, email: *, password: *, password_repeat: *}}
+         * @private
+         */
         _getUserData: function () {
             return {
                 username:        this.$el.find('#username').val(),
@@ -121,44 +130,6 @@ define([
                 password:        this.$el.find('#password').val(),
                 password_repeat: this.$el.find('#password_repeat').val()
             }
-        },
-
-        _setStatus: function (success, data) {
-            var status = this.$el.find('#status_info'),
-                status_messages = status.find('.alert');
-
-            status.removeClass('hidden');
-            this.$el.find('.form-group.field').addClass('has-success');
-
-            if (success) {
-                status_messages.addClass('alert-success');
-                status_messages.append($('<p>').html(GameApp.t(LANG_PATH + 'success_message')));
-            } else {
-                status_messages.addClass('alert-danger');
-                _.each(data['errors'], function (error) {
-                    status_messages.append($('<p>').html(error));
-                });
-
-
-                _.each(data['fields'], _.bind(function (field) {
-                    this.$el.find('#' + field).parents('.form-group.field')
-                        .removeClass('has-success')
-                        .addClass('has-error');
-                }, this));
-            }
-        },
-
-        _clearStatus: function () {
-            this.$el.find('#status_info')
-                .addClass('hidden')
-                .find('.alert')
-                .empty()
-                .removeClass('alert-danger')
-                .removeClass('alert-success');
-
-            this.$el.find('.form-group.field')
-                .removeClass('has-error')
-                .removeClass('has-success')
         }
     });
 });

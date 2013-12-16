@@ -6,7 +6,8 @@ define([
     'views/login/login',
     'views/login/register',
     'views/error',
-    'views/index'
+    'views/index',
+    'views/game/welcome'
 ], function(
     $,
     _,
@@ -15,7 +16,8 @@ define([
     LoginView,
     RegisterView,
     ErrorView,
-    IndexView
+    IndexView,
+    WelcomeView
 ) {
     'use strict';
 
@@ -27,6 +29,7 @@ define([
             'loader'  : 'loader_route',
             'login'   : 'login_route',
             'register': 'register_route',
+            'welcome' : 'welcome_route',
             '*default': 'error_route'
         },
 
@@ -54,6 +57,10 @@ define([
 
         register_route: function () {
             this._initView(new RegisterView());
+        },
+
+        welcome_route: function () {
+            this._initView(new WelcomeView());
         },
 
         error_route: function (route) {

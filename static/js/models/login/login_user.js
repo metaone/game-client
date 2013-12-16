@@ -5,6 +5,8 @@ define([
 ) {
     'use strict';
 
+    var LANG_PATH = 'models.login.login_user.';
+
     return BaseModel.extend({
         defaults: {
             username: false,
@@ -12,13 +14,22 @@ define([
         },
 
         validate: function () {
-            if (!this.username) {
-                return 'Please fill username field.';
+            var res = {
+                'errors': [],
+                'fields': []
+            };
+
+            if (!this.get('username')) {
+                res['errors'].push(GameApp.t(LANG_PATH + 'empty_username'));
+                res['fields'].push('username');
             }
 
-            if (!this.password) {
-                return 'Please fill password field.';
+            if (!this.get('password')) {
+                res['errors'].push(GameApp.t(LANG_PATH + 'empty_password'));
+                res['fields'].push('password');
             }
+
+            return _.isEmpty(res['errors']) && _.isEmpty(res['fields']) ? false : res;
         }
     });
 });
